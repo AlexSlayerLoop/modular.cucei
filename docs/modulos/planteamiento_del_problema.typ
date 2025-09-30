@@ -12,7 +12,11 @@ completar el registro para un candidato, y en ocasiones más si no esta
 familiarizado con el sistema. Esto se traduce en el registro de 8 personas
 tardarían aproximadamente 3 horas para completar el proceso. Lo que se busca es
 reducir este tiempo aproximadamente en un 50% con ayuda de inteligencia
-artificial y un buen diseño de experiencia de usuario (UI/UX).
+artificial y un buen diseño de experiencia de usuario (UI/UX). El sistema puede
+mejorarse por medio de visión artificial para poder auto rellenar los campos en
+los formularios, permitiendo así digitalizar la información de los documentos en
+tiempo real, y reducir los tiempos de llenado, además de hacer que la
+información sea más amigable para los sistemas computacionales.
 
 Los problemas que se desencadenan del problema principal son:
 - El tiempo que toma completar el registro de un candidato es muy alto.
@@ -26,15 +30,4 @@ Los problemas que se desencadenan del problema principal son:
   en los dictámenes.
 
 
-== Archivos gobernador
-acta de nacimiento
-acuse declaración patrimonial
-búsqueda de registro de deudores alimentarios
-certificado de solicitud de licencia al cargo
-escrito de aceptación y manifestación bajo protesta
-escrito de la persona dirigente del partdio politico
-formato 3 de 3 contra la violencia
-formulario de aceptación de registro
-ine certificada
-informe de capacidad economica
 
