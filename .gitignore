@@ -1,0 +1,7 @@
+# temporary ignored files
+.env
+paddleocr/
+backend/Dockerfile.bak
+backend/requirements.txt
+
+**/.DS_Store
