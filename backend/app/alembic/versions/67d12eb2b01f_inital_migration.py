@@ -1,8 +1,8 @@
-"""initial migration
+"""inital migration
 
-Revision ID: df304c55ca12
+Revision ID: 67d12eb2b01f
 Revises: 
-Create Date: 2025-10-06 18:30:30.180302
+Create Date: 2025-10-14 22:23:24.713456
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ import sqlmodel.sql.sqltypes
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'df304c55ca12'
+revision: str = '67d12eb2b01f'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -27,7 +27,6 @@ def upgrade() -> None:
     sa.Column('full_name', sqlmodel.sql.sqltypes.AutoString(length=255), nullable=True),
     sa.Column('is_superuser', sa.Boolean(), nullable=False),
     sa.Column('municipality', sa.Integer(), nullable=True),
-    sa.Column('party_name', sa.Enum('MORENA', 'PAN', 'PRI', 'PRD', 'PT', 'MC', 'PVEM', name='partyenum'), nullable=False),
     sa.Column('id', sa.Uuid(), nullable=False),
     sa.Column('hashed_password', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.PrimaryKeyConstraint('id')
