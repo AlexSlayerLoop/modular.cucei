@@ -18,7 +18,7 @@ from app.models import (
     UserUpdateMe,
 )
 
-router = APIRouter(tags=["users"])
+router = APIRouter(prefix="/users", tags=["users"])
 
 
 @router.get(
