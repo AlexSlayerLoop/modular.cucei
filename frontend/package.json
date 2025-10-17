@@ -6,7 +6,8 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "generate-client": "openapi-ts"
   },
   "dependencies": {
     "@react-router/node": "^7.9.2",
@@ -17,6 +18,7 @@
     "react-router": "^7.9.2"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.85.1",
     "@react-router/dev": "^7.9.2",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^22",
