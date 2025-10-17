@@ -98,7 +98,7 @@ estándar (CSV , JSON, PDF).
 
 
 == Archivos requeridos
-== Gobernador
+=== Gobernador
 + acta de nacimiento
 + acuse declaración patrimonial
 + búsqueda de registro de deudores alimentarios
