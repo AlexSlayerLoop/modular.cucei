@@ -1,7 +1,9 @@
+import datetime
 import uuid
 from enum import Enum
 
 from pydantic import EmailStr
+from sqlalchemy.orm import RelationshipProperty
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -72,6 +74,45 @@ class MunicipalCandidacy(MunicipalCandidacyBase, table=True):
     user_id: uuid.UUID = Field(foreign_key="user.id", ondelete="CASCADE")
     user: User = Relationship(  # pyright: ignore[reportAny]
         back_populates="municipal_candidacies",
+    )
+
+    candidate_personal_info: "CandidatePersonalInfo" = Relationship(  # pyright: ignore[reportAny]
+        sa_relationship=RelationshipProperty(
+            "CandidatePersonalInfo", back_populates="municipal_candidacy", uselist=False
+        )
+    )
+
+
+class genderEnum(str, Enum):
+    M = "M"
+    H = "H"
+
+
+class CandidatePersonalInfo(SQLModel, table=True):
+    id: uuid.UUID = Field(
+        default_factory=uuid.uuid4,
+        primary_key=True,
+        index=True,
+        nullable=False,
+    )
+    full_name: str = Field(max_length=255)
+    birthdate: datetime.date
+    gender: genderEnum
+    state_of_residence: int = Field(ge=1, le=32)
+    municipality_of_residence: int = Field(ge=1, le=125)
+    curp: str = Field(min_length=18, max_length=18)
+    ine_valid_until: datetime.date
+    ine_clave_elector: str = Field(min_length=18, max_length=18)
+    # rfc, phone number, address, etc.
+
+    municipal_candidacy_id: uuid.UUID = Field(
+        foreign_key="municipalcandidacy.id",
+        ondelete="CASCADE",
+        unique=True,
+        nullable=False,
+    )
+    municipal_candidacy: MunicipalCandidacy = Relationship(  # pyright: ignore[reportAny]
+        back_populates="candidate_personal_info"
     )
 
 
