@@ -1,10 +1,10 @@
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import type { Route } from "./+types/layout";
 import { authMiddleware, timingMiddleware } from "~/middleware/auth";
 import Sidebar from "~/components/Common/Sidebar";
 
 export const clientMiddleware: Route.ClientMiddlewareFunction[] = [
-  timingMiddleware,
+  // timingMiddleware,
   authMiddleware,
 ];
 
