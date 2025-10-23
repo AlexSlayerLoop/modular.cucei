@@ -1,37 +1,54 @@
-import { Users, type UsersPublic } from "~/client";
+import { Users } from "~/client";
 import type { Route } from "./+types/admin";
+import Pagination from "~/components/Common/Pagination";
 
-export async function clientLoader() {
-  const { data, error, request, response } = await Users.usersReadUsers({
-    query: { limit: 10 },
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+  const url = new URL(request.url);
+  const currentPage = +(url.searchParams.get("page") || 1);
+  const USERS_PER_PAGE = 5;
+
+  const { data } = await Users.usersReadUsers({
+    query: { limit: USERS_PER_PAGE, skip: USERS_PER_PAGE * (currentPage - 1) },
   });
-  if (!response.ok) {
-    // manejar el error
-  } else {
-    return data;
-  }
+
+  return { data, currentPage, USERS_PER_PAGE };
 }
 
 export default function Admin({ loaderData }: Route.ComponentProps) {
-  const { count, data: users } = loaderData as UsersPublic;
+  const { data, currentPage, USERS_PER_PAGE } = loaderData;
+
+  const { data: users, count } = data!;
 
   return (
-    <div>
-      <div className="text-center">
-        <h1>Users Management</h1>
-        <p>Total users: {count}</p>
-        <p>Email | Name | Municipality</p>
-      </div>
-      <br />
+    <>
+      <table className="table-auto border-collapse border border-gray-400 mx-10">
+        <caption className="caption-top">Total users: {count}</caption>
+        <thead>
+          <tr className="bg-gray-200">
+            <th>Email</th>
+            <th>Name</th>
+            <th>Municipality</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr
+              key={user.id}
+              className="bg-gray-100 *:py-3 border border-y-2 border-gray-300"
+            >
+              <td>{user.email}</td>
+              <td>{user.full_name}</td>
+              <td>{user.municipality}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      <ul className="flex flex-col items-center">
-        {users.map((user) => (
-          <li key={user.id}>
-            {user.email} - {user.full_name ?? "[not set yet]"} -{" "}
-            {user.municipality ?? "[not set yet]"}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <Pagination
+        currentPage={currentPage}
+        count={count}
+        USERS_PER_PAGE={USERS_PER_PAGE}
+      />
+    </>
   );
 }
