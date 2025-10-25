@@ -12,6 +12,8 @@ export default [
 
   layout("./routes/layout.tsx", [
     route("admin", "./routes/admin.tsx"),
+    route("admin/user/:userId", "./routes/user.tsx"),
+    route("admin/create-user", "./routes/create-user.tsx"),
     route("dashboard", "./routes/dashboard.tsx"),
     route("me", "./routes/me.tsx"),
   ]),

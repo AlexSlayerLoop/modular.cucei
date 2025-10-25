@@ -34,7 +34,7 @@ export default function Pagination({
                 const page = index + 1;
                 return (
                   <li key={page}>
-                    <button
+                    <div
                       className={
                         page === currentPage
                           ? "px-3 py-1 border border-gray-300 rounded-md bg-black text-white hover:bg-gray-700"
@@ -46,7 +46,7 @@ export default function Pagination({
                       >
                         {page}
                       </Link>
-                    </button>
+                    </div>
                   </li>
                 );
               },
