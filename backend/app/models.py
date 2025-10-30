@@ -88,13 +88,7 @@ class genderEnum(str, Enum):
     H = "H"
 
 
-class CandidatePersonalInfo(SQLModel, table=True):
-    id: uuid.UUID = Field(
-        default_factory=uuid.uuid4,
-        primary_key=True,
-        index=True,
-        nullable=False,
-    )
+class CandidatePersonalInfoBase(SQLModel):
     full_name: str = Field(max_length=255)
     birthdate: datetime.date
     gender: genderEnum
@@ -103,8 +97,18 @@ class CandidatePersonalInfo(SQLModel, table=True):
     curp: str = Field(min_length=18, max_length=18)
     ine_valid_until: datetime.date
     ine_clave_elector: str = Field(min_length=18, max_length=18)
+    is_public_servant: bool
+    ocupation: str = Field(max_length=255)
     # rfc, phone number, address, etc.
 
+
+class CandidatePersonalInfo(CandidatePersonalInfoBase, table=True):
+    id: uuid.UUID = Field(
+        default_factory=uuid.uuid4,
+        primary_key=True,
+        index=True,
+        nullable=False,
+    )
     municipal_candidacy_id: uuid.UUID = Field(
         foreign_key="municipalcandidacy.id",
         ondelete="CASCADE",
