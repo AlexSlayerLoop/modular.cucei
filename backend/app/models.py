@@ -7,8 +7,18 @@ from sqlalchemy.orm import RelationshipProperty
 from sqlmodel import Field, Relationship, SQLModel
 
 
+class PoliticalParties(Enum):
+    mc = "MC"
+    morena = "MORENA"
+    pan = "PAN"
+    prd = "PRD"
+    pri = "PRI"
+    pt = "PT"
+
+
 # Shared properties | Political party model
 class UserBase(SQLModel):
+    polical_party: PoliticalParties | None = Field(default=None)
     email: EmailStr = Field(index=True, unique=True, max_length=255)
     full_name: str | None = Field(default=None, index=True, max_length=255)
     is_superuser: bool = False
