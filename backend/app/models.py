@@ -18,7 +18,7 @@ class PoliticalParties(Enum):
 
 # Shared properties | Political party model
 class UserBase(SQLModel):
-    polical_party: PoliticalParties | None = Field(default=None)
+    political_party: PoliticalParties | None = Field(default=None)
     email: EmailStr = Field(index=True, unique=True, max_length=255)
     full_name: str | None = Field(default=None, index=True, max_length=255)
     is_superuser: bool = False
