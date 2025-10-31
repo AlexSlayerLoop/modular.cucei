@@ -93,6 +93,10 @@ class MunicipalCandidacy(MunicipalCandidacyBase, table=True):
     )
 
 
+class MunicipalCandidacyPublic(MunicipalCandidacyBase):
+    id: uuid.UUID
+
+
 class genderEnum(str, Enum):
     M = "M"
     H = "H"
@@ -128,6 +132,19 @@ class CandidatePersonalInfo(CandidatePersonalInfoBase, table=True):
     municipal_candidacy: MunicipalCandidacy = Relationship(  # pyright: ignore[reportAny]
         back_populates="candidate_personal_info"
     )
+
+
+# class DocumentsBase(SQLModel, table=True):
+#     acta_de_nacimiento: str
+#     acuse_declaración_patrimonial: str
+#     búsqueda_de_registro_de_deudores_alimentarios: str
+#     certificado_de_solicitud_de_licencia_al_cargo: str
+#     escrito_de_aceptación_y_manifestación_bajo_protesta: str
+#     escrito_de_la_persona_dirigente_del_partdio_politico: str
+#     formato_3_de_3_contra_la_violencia: str
+#     formulario_de_aceptación_de_registro: str
+#     ine_certificada: str
+#     informe_de_capacidad_economica: str
 
 
 # Generic message
