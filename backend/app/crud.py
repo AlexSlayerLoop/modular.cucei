@@ -5,6 +5,8 @@ from sqlmodel import Session, select
 
 from app.core.security import get_password_hash, verify_password
 from app.models import (
+    CandidatePersonalInfo,
+    CandidatePersonalInfoBase,
     MunicipalCandidacy,
     MunicipalCandidacyBase,
     User,
@@ -51,7 +53,7 @@ def authenticate(*, session: Session, email: str, password: str) -> User | None:
     return db_user
 
 
-def get_candidacy_by_position(
+def get_current_user_candidacy_by_position(
     *, session: Session, position: int, user_id: uuid.UUID
 ) -> MunicipalCandidacy | None:
     statement = (
@@ -74,6 +76,22 @@ def create_candidacy(
 ) -> MunicipalCandidacy:
     db_obj = MunicipalCandidacy.model_validate(
         candidacy_create, update={"user_id": user_id}
+    )
+    session.add(db_obj)
+    session.commit()
+    session.refresh(db_obj)
+    return db_obj
+
+
+def create_personal_info(
+    *,
+    session: Session,
+    personal_info_in: CandidatePersonalInfoBase,
+    municipal_candidacy_id: uuid.UUID,
+) -> CandidatePersonalInfo:
+    db_obj = CandidatePersonalInfo.model_validate(
+        personal_info_in,
+        update={"municipal_candidacy_id": municipal_candidacy_id},
     )
     session.add(db_obj)
     session.commit()

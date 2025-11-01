@@ -134,6 +134,23 @@ class CandidatePersonalInfo(CandidatePersonalInfoBase, table=True):
     )
 
 
+class CandidatePersonalInfoPublic(CandidatePersonalInfoBase):
+    pass
+
+
+class CandidacyWithPersonalInfoCreate(SQLModel):
+    municipal_candidacy: MunicipalCandidacyBase
+    candidate_personal_info: CandidatePersonalInfoBase
+
+
+class CandidacyPublicWithPersonalInfo(MunicipalCandidacyPublic):
+    candidate_personal_info: CandidatePersonalInfoPublic
+
+
+# class PersonalInfoPublicWithCandidacy(CandidatePersonalInfoPublic):
+#     municipal_candidacy: MunicipalCandidacyPublic
+
+
 # class DocumentsBase(SQLModel, table=True):
 #     acta_de_nacimiento: str
 #     acuse_declaración_patrimonial: str

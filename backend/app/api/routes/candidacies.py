@@ -4,26 +4,29 @@ from fastapi import APIRouter, HTTPException, status
 
 from app import crud
 from app.api.deps import CurrentUser, SessionDep
-from app.models import MunicipalCandidacyBase, MunicipalCandidacyPublic
+from app.models import (
+    CandidacyPublicWithPersonalInfo,
+    CandidacyWithPersonalInfoCreate,
+)
 
 router = APIRouter(prefix="/candidacies", tags=["candidacies"])
 
 
-@router.post("/", response_model=MunicipalCandidacyPublic)
+@router.post("/", response_model=CandidacyPublicWithPersonalInfo)
 def create_candidacy(
     *,
     session: SessionDep,
-    candidacy_in: MunicipalCandidacyBase,
+    candidacy_in: CandidacyWithPersonalInfoCreate,
     current_user: CurrentUser,
 ) -> Any:
     """
     Create new municipal candidacy.
     """
-
-    candidacy = crud.get_candidacy_by_position(
-        session=session, position=candidacy_in.position, user_id=current_user.id
+    candidacy = crud.get_current_user_candidacy_by_position(
+        session=session,
+        position=candidacy_in.municipal_candidacy.position,
+        user_id=current_user.id,
     )
-
     if candidacy:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -31,8 +34,13 @@ def create_candidacy(
         )
     candidacy = crud.create_candidacy(
         session=session,
-        candidacy_create=candidacy_in,
+        candidacy_create=candidacy_in.municipal_candidacy,
         user_id=current_user.id,
+    )
+    _ = crud.create_personal_info(
+        session=session,
+        municipal_candidacy_id=candidacy.id,
+        personal_info_in=candidacy_in.candidate_personal_info,
     )
     return candidacy
 
