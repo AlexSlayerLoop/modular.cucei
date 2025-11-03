@@ -1,12 +1,15 @@
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
+from sqlmodel import select
 
 from app import crud
 from app.api.deps import CurrentUser, SessionDep
 from app.models import (
     CandidacyPublicWithPersonalInfo,
     CandidacyWithPersonalInfoCreate,
+    MunicipalCandidacy,
+    User,
 )
 
 router = APIRouter(prefix="/candidacies", tags=["candidacies"])
@@ -22,15 +25,21 @@ def create_candidacy(
     """
     Create new municipal candidacy.
     """
-    candidacy = crud.get_current_user_candidacy_by_position(
-        session=session,
-        position=candidacy_in.municipal_candidacy.position,
-        user_id=current_user.id,
+    statement = (
+        select(MunicipalCandidacy)
+        .join(User)
+        .where(
+            MunicipalCandidacy.position == candidacy_in.municipal_candidacy.position,
+            MunicipalCandidacy.municipality
+            == candidacy_in.municipal_candidacy.municipality,
+            User.political_party == current_user.political_party,
+        )
     )
+    candidacy = session.exec(statement).first()
     if candidacy:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="The user already has a candidacy for this position.",
+            detail="Esta candidatura ya existe para este puesto",
         )
     candidacy = crud.create_candidacy(
         session=session,
@@ -46,6 +55,28 @@ def create_candidacy(
 
 
 # TODO:get cadidacy by municipality
+# if the user is an admin, they can see all candicacies for a municipality
+@router.get("/", response_model=list[CandidacyPublicWithPersonalInfo])
+def get_candidacies(
+    *, session: SessionDep, current_user: CurrentUser, municipality: int
+) -> Any:
+    """
+    Get municipal candidacies for the current user's political party in a given
+    municipality.
+    """
+    statement = (
+        select(MunicipalCandidacy)
+        .join(User)
+        .where(
+            User.political_party == current_user.political_party,
+            MunicipalCandidacy.municipality == municipality,
+        )
+    )
+    candidacies = session.exec(statement).all()
+
+    return candidacies
+
+
 # TODO:get cadidacy by user
 
 # TODO:update candidacy

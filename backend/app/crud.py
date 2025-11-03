@@ -53,21 +53,6 @@ def authenticate(*, session: Session, email: str, password: str) -> User | None:
     return db_user
 
 
-def get_current_user_candidacy_by_position(
-    *, session: Session, position: int, user_id: uuid.UUID
-) -> MunicipalCandidacy | None:
-    statement = (
-        select(MunicipalCandidacy)
-        .join(User)
-        .where(
-            MunicipalCandidacy.position == position,
-            MunicipalCandidacy.user_id == user_id,
-        )
-    )
-    candidacy = session.exec(statement).first()
-    return candidacy
-
-
 def create_candidacy(
     *,
     session: Session,
