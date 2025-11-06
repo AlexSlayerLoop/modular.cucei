@@ -2,6 +2,11 @@ FROM python:3.10
 
 ENV PYTHONUNBUFFERED=1
 
+# System deps for EasyOCR + PDF handling
+RUN apt-get update && apt-get install -y \
+    ffmpeg libsm6 libxext6 git poppler-utils \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app/
 
 # Install uv
