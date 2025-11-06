@@ -61,7 +61,7 @@ export default function UserMe({ loaderData }: Route.ComponentProps) {
         className="grid grid-cols-[_1fr_3fr] gap-2 justify-items-stretch text-3xl"
       >
         <label htmlFor="email" className="font-bold">
-          Email{" "}
+          Email
         </label>
         <input
           className="border-2"
@@ -94,6 +94,19 @@ export default function UserMe({ loaderData }: Route.ComponentProps) {
           defaultValue={user?.municipality ?? ""}
           readOnly
         />
+
+        <label htmlFor="political_party" className="font-bold">
+          Partido
+        </label>
+        <input
+          className="border-2"
+          type="text"
+          id="political_party"
+          name="political_party"
+          defaultValue={user?.political_party ?? ""}
+          readOnly
+        />
+
         <div className="col-span-2 flex gap-4 justify-end mt-4">
           <button
             type="submit"

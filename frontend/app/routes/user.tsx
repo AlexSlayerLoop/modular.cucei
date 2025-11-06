@@ -189,6 +189,20 @@ export default function User({ loaderData }: Route.ComponentProps) {
             />
           </div>
 
+          {/* political_party */}
+          <div>
+            <label htmlFor="political_party" className="font-bold">
+              Partido
+            </label>
+            <input
+              type="text"
+              id="political_party"
+              name="political_party"
+              defaultValue={user?.political_party ?? ""}
+              readOnly
+            />
+          </div>
+
           {/* buttons */}
           <div className="flex gap-4 justify-end mt-4">
             <button
