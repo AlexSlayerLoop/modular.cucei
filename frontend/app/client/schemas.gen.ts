@@ -55,6 +55,199 @@ export const Body_login_login_access_tokenSchema = {
     title: 'Body_login-login_access_token'
 } as const;
 
+export const Body_ocr_ocr_endpointSchema = {
+    properties: {
+        file: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'binary'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'File'
+        },
+        image_url: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Image Url'
+        }
+    },
+    type: 'object',
+    title: 'Body_ocr-ocr_endpoint'
+} as const;
+
+export const CandidacyPublicWithPersonalInfoSchema = {
+    properties: {
+        political_position: {
+            '$ref': '#/components/schemas/PoliticalPosition'
+        },
+        position: {
+            type: 'integer',
+            maximum: 12,
+            exclusiveMinimum: 0,
+            title: 'Position'
+        },
+        municipality: {
+            type: 'integer',
+            maximum: 125,
+            minimum: 1,
+            title: 'Municipality'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        candidate_personal_info: {
+            '$ref': '#/components/schemas/CandidatePersonalInfoPublic'
+        }
+    },
+    type: 'object',
+    required: ['political_position', 'position', 'municipality', 'id', 'candidate_personal_info'],
+    title: 'CandidacyPublicWithPersonalInfo'
+} as const;
+
+export const CandidacyWithPersonalInfoCreateSchema = {
+    properties: {
+        municipal_candidacy: {
+            '$ref': '#/components/schemas/MunicipalCandidacyBase'
+        },
+        candidate_personal_info: {
+            '$ref': '#/components/schemas/CandidatePersonalInfoBase'
+        }
+    },
+    type: 'object',
+    required: ['municipal_candidacy', 'candidate_personal_info'],
+    title: 'CandidacyWithPersonalInfoCreate'
+} as const;
+
+export const CandidatePersonalInfoBaseSchema = {
+    properties: {
+        full_name: {
+            type: 'string',
+            maxLength: 255,
+            title: 'Full Name'
+        },
+        birthdate: {
+            type: 'string',
+            format: 'date',
+            title: 'Birthdate'
+        },
+        gender: {
+            '$ref': '#/components/schemas/genderEnum'
+        },
+        state_of_residence: {
+            type: 'integer',
+            maximum: 32,
+            minimum: 1,
+            title: 'State Of Residence'
+        },
+        municipality_of_residence: {
+            type: 'integer',
+            maximum: 125,
+            minimum: 1,
+            title: 'Municipality Of Residence'
+        },
+        curp: {
+            type: 'string',
+            maxLength: 18,
+            minLength: 18,
+            title: 'Curp'
+        },
+        ine_valid_until: {
+            type: 'string',
+            format: 'date',
+            title: 'Ine Valid Until'
+        },
+        ine_clave_elector: {
+            type: 'string',
+            maxLength: 18,
+            minLength: 18,
+            title: 'Ine Clave Elector'
+        },
+        is_public_servant: {
+            type: 'boolean',
+            title: 'Is Public Servant'
+        },
+        ocupation: {
+            type: 'string',
+            maxLength: 255,
+            title: 'Ocupation'
+        }
+    },
+    type: 'object',
+    required: ['full_name', 'birthdate', 'gender', 'state_of_residence', 'municipality_of_residence', 'curp', 'ine_valid_until', 'ine_clave_elector', 'is_public_servant', 'ocupation'],
+    title: 'CandidatePersonalInfoBase'
+} as const;
+
+export const CandidatePersonalInfoPublicSchema = {
+    properties: {
+        full_name: {
+            type: 'string',
+            maxLength: 255,
+            title: 'Full Name'
+        },
+        birthdate: {
+            type: 'string',
+            format: 'date',
+            title: 'Birthdate'
+        },
+        gender: {
+            '$ref': '#/components/schemas/genderEnum'
+        },
+        state_of_residence: {
+            type: 'integer',
+            maximum: 32,
+            minimum: 1,
+            title: 'State Of Residence'
+        },
+        municipality_of_residence: {
+            type: 'integer',
+            maximum: 125,
+            minimum: 1,
+            title: 'Municipality Of Residence'
+        },
+        curp: {
+            type: 'string',
+            maxLength: 18,
+            minLength: 18,
+            title: 'Curp'
+        },
+        ine_valid_until: {
+            type: 'string',
+            format: 'date',
+            title: 'Ine Valid Until'
+        },
+        ine_clave_elector: {
+            type: 'string',
+            maxLength: 18,
+            minLength: 18,
+            title: 'Ine Clave Elector'
+        },
+        is_public_servant: {
+            type: 'boolean',
+            title: 'Is Public Servant'
+        },
+        ocupation: {
+            type: 'string',
+            maxLength: 255,
+            title: 'Ocupation'
+        }
+    },
+    type: 'object',
+    required: ['full_name', 'birthdate', 'gender', 'state_of_residence', 'municipality_of_residence', 'curp', 'ine_valid_until', 'ine_clave_elector', 'is_public_servant', 'ocupation'],
+    title: 'CandidatePersonalInfoPublic'
+} as const;
+
 export const HTTPValidationErrorSchema = {
     properties: {
         detail: {
@@ -79,6 +272,41 @@ export const MessageSchema = {
     type: 'object',
     required: ['message'],
     title: 'Message'
+} as const;
+
+export const MunicipalCandidacyBaseSchema = {
+    properties: {
+        political_position: {
+            '$ref': '#/components/schemas/PoliticalPosition'
+        },
+        position: {
+            type: 'integer',
+            maximum: 12,
+            exclusiveMinimum: 0,
+            title: 'Position'
+        },
+        municipality: {
+            type: 'integer',
+            maximum: 125,
+            minimum: 1,
+            title: 'Municipality'
+        }
+    },
+    type: 'object',
+    required: ['political_position', 'position', 'municipality'],
+    title: 'MunicipalCandidacyBase'
+} as const;
+
+export const PoliticalPartiesSchema = {
+    type: 'string',
+    enum: ['MC', 'MORENA', 'PAN', 'PRD', 'PRI', 'PT'],
+    title: 'PoliticalParties'
+} as const;
+
+export const PoliticalPositionSchema = {
+    type: 'string',
+    enum: ['Presidente', 'Sindico', 'Regidor'],
+    title: 'PoliticalPosition'
 } as const;
 
 export const TokenSchema = {
@@ -120,6 +348,16 @@ export const UpdatePasswordSchema = {
 
 export const UserCreateSchema = {
     properties: {
+        political_party: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/PoliticalParties'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
         email: {
             type: 'string',
             maxLength: 255,
@@ -170,6 +408,16 @@ export const UserCreateSchema = {
 
 export const UserPublicSchema = {
     properties: {
+        political_party: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/PoliticalParties'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
         email: {
             type: 'string',
             maxLength: 255,
@@ -219,6 +467,16 @@ export const UserPublicSchema = {
 
 export const UserUpdateSchema = {
     properties: {
+        political_party: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/PoliticalParties'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
         email: {
             anyOf: [
                 {
@@ -359,4 +617,10 @@ export const ValidationErrorSchema = {
     type: 'object',
     required: ['loc', 'msg', 'type'],
     title: 'ValidationError'
+} as const;
+
+export const genderEnumSchema = {
+    type: 'string',
+    enum: ['M', 'H'],
+    title: 'genderEnum'
 } as const;

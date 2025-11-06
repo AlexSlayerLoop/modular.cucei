@@ -35,6 +35,134 @@ export type BodyLoginLoginAccessToken = {
 };
 
 /**
+ * Body_ocr-ocr_endpoint
+ */
+export type BodyOcrOcrEndpoint = {
+    /**
+     * File
+     */
+    file?: Blob | File | null;
+    /**
+     * Image Url
+     */
+    image_url?: string | null;
+};
+
+/**
+ * CandidacyPublicWithPersonalInfo
+ */
+export type CandidacyPublicWithPersonalInfo = {
+    political_position: PoliticalPosition;
+    /**
+     * Position
+     */
+    position: number;
+    /**
+     * Municipality
+     */
+    municipality: number;
+    /**
+     * Id
+     */
+    id: string;
+    candidate_personal_info: CandidatePersonalInfoPublic;
+};
+
+/**
+ * CandidacyWithPersonalInfoCreate
+ */
+export type CandidacyWithPersonalInfoCreate = {
+    municipal_candidacy: MunicipalCandidacyBase;
+    candidate_personal_info: CandidatePersonalInfoBase;
+};
+
+/**
+ * CandidatePersonalInfoBase
+ */
+export type CandidatePersonalInfoBase = {
+    /**
+     * Full Name
+     */
+    full_name: string;
+    /**
+     * Birthdate
+     */
+    birthdate: string;
+    gender: GenderEnum;
+    /**
+     * State Of Residence
+     */
+    state_of_residence: number;
+    /**
+     * Municipality Of Residence
+     */
+    municipality_of_residence: number;
+    /**
+     * Curp
+     */
+    curp: string;
+    /**
+     * Ine Valid Until
+     */
+    ine_valid_until: string;
+    /**
+     * Ine Clave Elector
+     */
+    ine_clave_elector: string;
+    /**
+     * Is Public Servant
+     */
+    is_public_servant: boolean;
+    /**
+     * Ocupation
+     */
+    ocupation: string;
+};
+
+/**
+ * CandidatePersonalInfoPublic
+ */
+export type CandidatePersonalInfoPublic = {
+    /**
+     * Full Name
+     */
+    full_name: string;
+    /**
+     * Birthdate
+     */
+    birthdate: string;
+    gender: GenderEnum;
+    /**
+     * State Of Residence
+     */
+    state_of_residence: number;
+    /**
+     * Municipality Of Residence
+     */
+    municipality_of_residence: number;
+    /**
+     * Curp
+     */
+    curp: string;
+    /**
+     * Ine Valid Until
+     */
+    ine_valid_until: string;
+    /**
+     * Ine Clave Elector
+     */
+    ine_clave_elector: string;
+    /**
+     * Is Public Servant
+     */
+    is_public_servant: boolean;
+    /**
+     * Ocupation
+     */
+    ocupation: string;
+};
+
+/**
  * HTTPValidationError
  */
 export type HttpValidationError = {
@@ -53,6 +181,31 @@ export type Message = {
      */
     message: string;
 };
+
+/**
+ * MunicipalCandidacyBase
+ */
+export type MunicipalCandidacyBase = {
+    political_position: PoliticalPosition;
+    /**
+     * Position
+     */
+    position: number;
+    /**
+     * Municipality
+     */
+    municipality: number;
+};
+
+/**
+ * PoliticalParties
+ */
+export type PoliticalParties = 'MC' | 'MORENA' | 'PAN' | 'PRD' | 'PRI' | 'PT';
+
+/**
+ * PoliticalPosition
+ */
+export type PoliticalPosition = 'Presidente' | 'Sindico' | 'Regidor';
 
 /**
  * Token
@@ -86,6 +239,7 @@ export type UpdatePassword = {
  * UserCreate
  */
 export type UserCreate = {
+    political_party?: PoliticalParties | null;
     /**
      * Email
      */
@@ -112,6 +266,7 @@ export type UserCreate = {
  * UserPublic
  */
 export type UserPublic = {
+    political_party?: PoliticalParties | null;
     /**
      * Email
      */
@@ -138,6 +293,7 @@ export type UserPublic = {
  * UserUpdate
  */
 export type UserUpdate = {
+    political_party?: PoliticalParties | null;
     /**
      * Email
      */
@@ -205,6 +361,11 @@ export type ValidationError = {
      */
     type: string;
 };
+
+/**
+ * genderEnum
+ */
+export type GenderEnum = 'M' | 'H';
 
 export type LoginLoginAccessTokenData = {
     body: BodyLoginLoginAccessToken;
@@ -461,6 +622,115 @@ export type UsersUpdatePasswordMeResponses = {
 };
 
 export type UsersUpdatePasswordMeResponse = UsersUpdatePasswordMeResponses[keyof UsersUpdatePasswordMeResponses];
+
+export type CandidaciesGetCandidaciesData = {
+    body?: never;
+    path?: never;
+    query: {
+        /**
+         * Municipality
+         */
+        municipality: number;
+    };
+    url: '/api/v1/candidacies/';
+};
+
+export type CandidaciesGetCandidaciesErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CandidaciesGetCandidaciesError = CandidaciesGetCandidaciesErrors[keyof CandidaciesGetCandidaciesErrors];
+
+export type CandidaciesGetCandidaciesResponses = {
+    /**
+     * Response Candidacies-Get Candidacies
+     * Successful Response
+     */
+    200: Array<CandidacyPublicWithPersonalInfo>;
+};
+
+export type CandidaciesGetCandidaciesResponse = CandidaciesGetCandidaciesResponses[keyof CandidaciesGetCandidaciesResponses];
+
+export type CandidaciesCreateCandidacyData = {
+    body: CandidacyWithPersonalInfoCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/candidacies/';
+};
+
+export type CandidaciesCreateCandidacyErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CandidaciesCreateCandidacyError = CandidaciesCreateCandidacyErrors[keyof CandidaciesCreateCandidacyErrors];
+
+export type CandidaciesCreateCandidacyResponses = {
+    /**
+     * Successful Response
+     */
+    200: CandidacyPublicWithPersonalInfo;
+};
+
+export type CandidaciesCreateCandidacyResponse = CandidaciesCreateCandidacyResponses[keyof CandidaciesCreateCandidacyResponses];
+
+export type CandidaciesGetCandidacyByIdData = {
+    body?: never;
+    path: {
+        /**
+         * Candidacy Id
+         */
+        candidacy_id: string;
+    };
+    query?: never;
+    url: '/api/v1/candidacies/{candidacy_id}';
+};
+
+export type CandidaciesGetCandidacyByIdErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CandidaciesGetCandidacyByIdError = CandidaciesGetCandidacyByIdErrors[keyof CandidaciesGetCandidacyByIdErrors];
+
+export type CandidaciesGetCandidacyByIdResponses = {
+    /**
+     * Successful Response
+     */
+    200: CandidacyPublicWithPersonalInfo;
+};
+
+export type CandidaciesGetCandidacyByIdResponse = CandidaciesGetCandidacyByIdResponses[keyof CandidaciesGetCandidacyByIdResponses];
+
+export type OcrOcrEndpointData = {
+    body?: BodyOcrOcrEndpoint;
+    path?: never;
+    query?: never;
+    url: '/api/v1/ocr/';
+};
+
+export type OcrOcrEndpointErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type OcrOcrEndpointError = OcrOcrEndpointErrors[keyof OcrOcrEndpointErrors];
+
+export type OcrOcrEndpointResponses = {
+    /**
+     * Successful Response
+     */
+    200: unknown;
+};
 
 export type UtilsHealthCheckData = {
     body?: never;
