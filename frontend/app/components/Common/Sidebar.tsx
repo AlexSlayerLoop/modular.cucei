@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
+import type { UserPublic } from "~/client";
 
-export default function Sidebar() {
+export default function Sidebar({ currentUser }: { currentUser: UserPublic }) {
   return (
     <aside className="basis-48 bg-gray-300">
       <nav>
@@ -11,7 +12,7 @@ export default function Sidebar() {
               isActive ? "bg-black text-white p-2" : "hover:underline"
             }
           >
-            My Profile
+            Mi Perfil
           </NavLink>
 
           <NavLink
@@ -24,22 +25,24 @@ export default function Sidebar() {
           </NavLink>
 
           <NavLink
-            to="create-registro"
+            to="candidacies"
             className={({ isActive }) =>
               isActive ? "bg-black text-white p-2" : "hover:underline"
             }
           >
-            Crear Registro
+            Candidaturas
           </NavLink>
 
-          <NavLink
-            to="admin"
-            className={({ isActive }) =>
-              isActive ? "bg-black text-white p-2" : "hover:underline"
-            }
-          >
-            Admin
-          </NavLink>
+          {currentUser.is_superuser && (
+            <NavLink
+              to="admin"
+              className={({ isActive }) =>
+                isActive ? "bg-black text-white p-2" : "hover:underline"
+              }
+            >
+              Admin
+            </NavLink>
+          )}
         </ul>
       </nav>
     </aside>
