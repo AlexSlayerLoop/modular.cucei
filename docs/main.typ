@@ -53,7 +53,7 @@
 #include "modulos/hipotesis.typ" // TODO: TERMINAR
 
 = Diseño
-#include "modulos/diseño.typ" // TODO: completar
+#include "modulos/diseno.typ" // TODO: completar
 
 = Implementación
 #include "modulos/implementacion.typ" // TODO: TERMINAR
