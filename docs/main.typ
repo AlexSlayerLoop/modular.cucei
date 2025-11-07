@@ -2,7 +2,7 @@
 
 #show: t.conf.with(
   title: [
-    SIRC AI
+    SISGE
   ],
   abstract: include "modulos/abstract.typ",
   authors: (
@@ -12,14 +12,9 @@
       email: "alex-suarez@live.com",
     ),
     (
-      name: "Diego Alejandro",
+      name: "Diego Alejandro Martinez Melendez",
       affiliation: "CENTRO UNIVERSITARIO DE CIENCIAS EXACTAS E INGENIERIAS (CUCEI, UDG)",
-      email: "alejandro.suarez6397@alumnos.udg.mx",
-    ),
-    (
-      name: "Eugene Deklan",
-      affiliation: "Honduras State",
-      email: "e.deklan@hstate.hn",
+      email: "diego.martinez4954@alumnos.udg.mx",
     ),
   ),
   keywords: [Palabras Clave--- Registro de candidaturas; inteligencia
@@ -31,8 +26,6 @@
     title: "Referencias Bibliográficas",
   ),
 )
-
-// PD: una cuartilla equivale entre 250 y 300 palabras aproximadamente.
 
 = Introducción
 #include "modulos/introduccion.typ"
@@ -53,10 +46,10 @@
 #include "modulos/hipotesis.typ" // TODO: TERMINAR
 
 = Diseño
-#include "modulos/diseno.typ" // TODO: completar
+#include "modulos/diseno.typ"
 
 = Implementación
-#include "modulos/implementacion.typ" // TODO: TERMINAR
+#include "modulos/implementacion.typ"
 
 = Conclusiones
-#include "modulos/conclusiones.typ" // TODO: TERMINAR
+#include "modulos/conclusiones.typ"

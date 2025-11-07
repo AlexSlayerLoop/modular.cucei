@@ -13,8 +13,8 @@ En Jalisco, un estado con alto peso electoral, el registro de candidaturas
 demanda la revisión masiva de expedientes. En 2023–2024, el umbral máximo
 alcanzó miles de registros y decenas de miles de documentos adjuntos, con
 validación manual sujeta a carga operativa y posibles omisiones. El SIRC
-modernizó el trámite digital, pero no integra IA para verificación asistida. El
-Informador
+modernizó el trámite digital, pero no integra IA para verificación asistida.
+
 
 == Población Objetivo
 Personal técnico-jurídico del IEPC Jalisco y áreas de registro en OPLE;
@@ -25,7 +25,7 @@ consulta.
 Reducir tiempos de dictaminación y variabilidad en criterios, prevenir errores
 de elegibilidad (p. ej., residencia efectiva), fortalecer la trazabilidad ante
 observaciones o impugnaciones. Véanse lineamientos y actas de sesión que
-enmarcan el proceso de aprobación. iepcjalisco.org.mx+1
+enmarcan el proceso de aprobación.
 
 == Interés Del Proyecto
 Incorporar IA como apoyo al servidor público, no para sustituir su criterio,
@@ -33,14 +33,11 @@ mediante detección temprana de omisiones, verificación cruzada y checklists
 inteligentes.
 
 == Beneficios Esperados
-(i) Menor tiempo por expediente
-(ii) más hallazgos
-pertinentes y menos falsos negativos
-(iii) estandarización y explicabilidad de
-dictámenes
-(iv) trazabilidad/bitácora auditable
-(v) mejor experiencia para
-fuerzas políticas y candidaturas.
+- Menor tiempo por expediente
+- más hallazgos pertinentes y menos falsos negativos
+- estandarización y explicabilidad de dictámenes
+- trazabilidad/bitácora auditable
+- mejor experiencia para fuerzas políticas y candidaturas.
 
 == Solución Propuesta
 Plataforma web con: carga guiada, OCR/visión para leer

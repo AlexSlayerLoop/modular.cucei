@@ -18,7 +18,7 @@
     ],
   )
   set par(
-    first-line-indent: 3em,
+    first-line-indent: 2em,
     justify: true,
     leading: 0.65em,
   )
