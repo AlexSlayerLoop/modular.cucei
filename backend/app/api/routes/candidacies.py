@@ -1,3 +1,4 @@
+import uuid
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
@@ -78,6 +79,14 @@ def get_candidacies(
 
 
 # TODO:get cadidacy by user
+@router.get("/{candidacy_id}", response_model=CandidacyPublicWithPersonalInfo)
+def get_candidacy_by_id(*, session: SessionDep, candidacy_id: uuid.UUID) -> Any:
+    """
+    Get municipal candidacy by ID.
+    """
+    candidacy = session.get(MunicipalCandidacy, candidacy_id)
+    return candidacy
+
 
 # TODO:update candidacy
 # TODO:delete candidacy
