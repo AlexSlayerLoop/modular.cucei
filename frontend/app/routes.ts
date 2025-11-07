@@ -16,5 +16,8 @@ export default [
     route("admin/create-user", "./routes/create-user.tsx"),
     route("dashboard", "./routes/dashboard.tsx"),
     route("me", "./routes/me.tsx"),
+    route("candidacies", "./routes/candidacies.tsx"),
+    route("candidacy/:candidacyId", "./routes/candidacy.tsx"),
+    route("create-candidacy", "./routes/create-candidacy.tsx"),
   ]),
 ] satisfies RouteConfig;
