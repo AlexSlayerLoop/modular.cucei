@@ -165,7 +165,7 @@ export default function CreateCandidacy({
           </select>
           <button
             type="submit"
-            className="bg-black text-white rounded-md p-1 ml-2"
+            className="bg-black text-white rounded-md p-1 ml-2 hover:bg-gray-800"
           >
             Buscar
           </button>
@@ -175,11 +175,21 @@ export default function CreateCandidacy({
       {candidacies ? (
         <>
           <h1 className="text-center font-bold">Registros de municipio</h1>
-          <ol className="*:border-3 *:rounded-2xl *:p-2 *:mb-2">
+          <ol className="flex flex-col items-center">
             {candidacies.map((candidacy) => (
-              <li key={candidacy.id}>
-                <p>{candidacy.political_position}</p>
-                <p>posicion: {candidacy.position}</p>
+              <li
+                key={candidacy.id}
+                className="border-1 shadow-2xl rounded-md w-3/4 lg:w-1/3 p-2 my-2"
+              >
+                <div className="flex justify-between">
+                  <p className="text-3xl text-bold">
+                    {candidacy.political_position}
+                  </p>
+                  <p>posicion {candidacy.position}</p>
+                </div>
+                <p className="text-gray-700 text-xl">
+                  {candidacy.candidate_personal_info.full_name}
+                </p>
                 <Link
                   to={{ pathname: `/candidacy/${candidacy.id}` }}
                   className="text-blue-700 underline"
@@ -188,7 +198,12 @@ export default function CreateCandidacy({
                 </Link>
               </li>
             ))}
-            <Link to="/create-candidacy">crear nueva +</Link>
+            <Link
+              to="/create-candidacy"
+              className="p-2 rounded-md hover:text-white hover:bg-black"
+            >
+              crear nueva +
+            </Link>
           </ol>
         </>
       ) : (
