@@ -15,8 +15,8 @@ la institución electoral. Pero un aspecto fundamental que debe mencionarse es l
 estricta validación de la información extraída su naturaleza compleja en materia
 de tramites oficiales, es aquí donde diría que centra el corazón del proyecto.
 
-Diría que aunque hace falta mucho esfuerzo aun para imitar la complejidad de un
-sistema real, se logró acercar bastante a lo que podría ser un comienzo para
+Aunque hace falta mucho esfuerzo aun para imitar la complejidad de un sistema
+real, se logró acercar bastante a lo que podría ser un comienzo para
 implementaciones en empresas o instituciones actuales que busquen este nivel de
 complejidad para manejar formularios oficiales y tomando en cuenta los otros
 aspectos demandados para completar todos los módulos de proyecto modular, este
