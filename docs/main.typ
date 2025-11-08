@@ -16,6 +16,11 @@
       affiliation: "CENTRO UNIVERSITARIO DE CIENCIAS EXACTAS E INGENIERIAS (CUCEI, UDG)",
       email: "diego.martinez4954@alumnos.udg.mx",
     ),
+    (
+      name: "Profesor. Carlos Alberto López Franco",
+      affiliation: "CENTRO UNIVERSITARIO DE CIENCIAS EXACTAS E INGENIERIAS (CUCEI, UDG)",
+      email: "carlos.lfranco@academicos.udg.mx ",
+    ),
   ),
   keywords: [Palabras Clave--- Registro de candidaturas; inteligencia
     artificial; visión por computadora; OCR; verificación documental; sistemas

@@ -8,6 +8,19 @@ del tema que se abordará. Redactar mínimo 1 cuartilla sin contar imágenes,
 tablas, diagramas, código ni capturas de pantalla.
 */
 
+Jalisco cuenta con 125 municipios, y la elección de munícipes implica gestionar
+un gran volumen de expedientes por partidos, coaliciones y, en su caso,
+candidaturas independientes. Este contexto obliga a plataformas y lineamientos
+específicos para registro, validación y posterior publicación de la información
+a la ciudadanía.
+
+El IEPC Jalisco emite Lineamientos para el registro de candidaturas y criterios
+aplicables en cada proceso, y opera sistemas como el Sistema Integral de
+Registro de Candidaturas (SIRC) para captura y trámite de solicitudes. Nuestro
+sistema se alinea a ese marco institucional, integrándose a los flujos formales
+de registro y In
+
+Desde la perspectiva operativa, el proceso anterior implicó la carga de  aproximadamente 7 documentos por candidatura, que tiene efecto en una captura manual con 15–20 min aproximados por registro, y revisión manual de aproximadamente decenas de miles de documentos; ello genera cuellos de botella en ventanas legales acotadas y propicia inconsistencias formulario–documento. La solución propuesta introduce automatización asistida por IA para disminuir fricción de captura y aumentar la velocidad/fiabilidad de la validación.
 == problema y contexto
 En Jalisco, un estado con alto peso electoral, el registro de candidaturas
 demanda la revisión masiva de expedientes. En 2023–2024, el umbral máximo
@@ -45,8 +58,3 @@ documentos, extracción de entidades, motor de reglas y ML que mapea cada
 requisito legal a verificaciones automáticas y alertas, y tablero de control
 para revisores.
 
-== Objetivos
-+ Diseñar una arquitectura distribuida, segura y auditable.
-+ Integrar OCR/visión y ML para validar requisitos documentales.
-+ Lograr mejoras medibles en tiempo de revisión (-X%) y detección (+Y p.p.).
-+ Proveer bitácora y cadena de custodia compatibles con normativa.

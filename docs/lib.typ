@@ -10,7 +10,7 @@
   set page(
     paper: "us-letter",
     margin: (left: 3cm, rest: 2.5cm),
-    columns: 1,
+    columns: 2,
     footer: context [
       #set align(right)
       #set text(size: 10pt)
