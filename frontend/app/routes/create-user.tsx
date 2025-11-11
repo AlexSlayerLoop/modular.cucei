@@ -10,6 +10,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const password = formData.get("password") as string;
   const confirmar = formData.get("confirmar") as string;
   const municipality = formData.get("municipality") as string;
+  // TODO: agregar partido politico
 
   const body: UserCreate = { is_superuser, email, password };
   if (full_name && full_name.length > 0) body.full_name = full_name;

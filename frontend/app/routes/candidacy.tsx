@@ -20,7 +20,7 @@ export default function Candidacy({ loaderData }: Route.ComponentProps) {
           Esta página es para ver los detalles de una candidatura específica.
         </p>
       </details>
-
+      {/* TODO: mejorar el diseño de esta pagina */}
       <div className="flex flex-col">
         <pre>{JSON.stringify(cadidacy, null, 2)}</pre>
       </div>

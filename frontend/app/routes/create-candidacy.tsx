@@ -4,7 +4,6 @@ import { userContext } from "~/context";
 import {
   Candidacies,
   Ocr,
-  type CandidacyPublicWithPersonalInfo,
   type CandidacyWithPersonalInfoCreate,
   type GenderEnum,
   type PoliticalPosition,

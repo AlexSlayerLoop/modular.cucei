@@ -39,16 +39,16 @@
 #include "modulos/planteamiento_del_problema.typ"
 
 = Objetivos
-#include "modulos/objetivos.typ" // TODO: TERMINAR
+#include "modulos/objetivos.typ"
 
 = Justificación
-#include "modulos/justficacion.typ" // TODO: TERMINAR
+#include "modulos/justficacion.typ"
 
 = Estado del Arte
 #include "modulos/estado_del_arte.typ"
 
 = Hipótesis
-#include "modulos/hipotesis.typ" // TODO: TERMINAR
+#include "modulos/hipotesis.typ"
 
 = Diseño
 #include "modulos/diseno.typ"
