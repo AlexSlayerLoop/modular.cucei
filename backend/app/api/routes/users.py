@@ -26,18 +26,37 @@ router = APIRouter(prefix="/users", tags=["users"])
     dependencies=[Depends(get_current_superuser)],
     response_model=UsersPublic,
 )
-def read_users(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
+def read_users(
+    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
+) -> Any:
     """
     Retrieve users.
     """
+    if current_user.political_party is None:
+        count_statement = select(func.count()).select_from(User)
+        count = session.exec(count_statement).one()
 
-    count_statement = select(func.count()).select_from(User)
-    count = session.exec(count_statement).one()
+        statement = select(User).offset(skip).limit(limit)
+        users = session.exec(statement).all()
+        return UsersPublic(data=users, count=count)
 
-    statement = select(User).offset(skip).limit(limit)
-    users = session.exec(statement).all()
+    else:
+        count_statement = (
+            select(func.count())
+            .select_from(User)
+            .where(User.political_party == current_user.political_party)
+        )
+        count = session.exec(count_statement).one()
 
-    return UsersPublic(data=users, count=count)
+        statement = (
+            select(User)
+            .where(User.political_party == current_user.political_party)
+            .offset(skip)
+            .limit(limit)
+        )
+        users = session.exec(statement).all()
+
+        return UsersPublic(data=users, count=count)
 
 
 @router.post(
