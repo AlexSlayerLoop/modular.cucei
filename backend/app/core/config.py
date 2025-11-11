@@ -42,6 +42,11 @@ class Settings(BaseSettings):
             path=self.POSTGRES_DB,
         )
 
+    AWS_ACCESS_KEY: str
+    AWS_SECRET_ACCESS_KEY: str
+    BUCKET_NAME: str
+    BUCKET_REGION: str
+
     # POLITICAL_PARTIES: Annotated[list[str] | str, BeforeValidator(parse_parties)] = []
 
 
