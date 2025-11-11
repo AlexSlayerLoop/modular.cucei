@@ -92,6 +92,12 @@ class MunicipalCandidacy(MunicipalCandidacyBase, table=True):
         )
     )
 
+    candidate_documents: "Documents" = Relationship(  # pyright: ignore[reportAny]
+        sa_relationship=RelationshipProperty(
+            "Documents", back_populates="municipal_candidacy", uselist=False
+        )
+    )
+
 
 class MunicipalCandidacyPublic(MunicipalCandidacyBase):
     id: uuid.UUID
@@ -109,7 +115,7 @@ class CandidatePersonalInfoBase(SQLModel):
     state_of_residence: int = Field(ge=1, le=32)
     municipality_of_residence: int = Field(ge=1, le=125)
     curp: str = Field(min_length=18, max_length=18)
-    ine_valid_until: datetime.date
+    ine_valid_until: str = Field(min_length=4, max_length=4)
     ine_clave_elector: str = Field(min_length=18, max_length=18)
     is_public_servant: bool
     ocupation: str = Field(max_length=255)
@@ -151,17 +157,41 @@ class CandidacyPublicWithPersonalInfo(MunicipalCandidacyPublic):
 #     municipal_candidacy: MunicipalCandidacyPublic
 
 
-# class DocumentsBase(SQLModel, table=True):
-#     acta_de_nacimiento: str
-#     acuse_declaración_patrimonial: str
-#     búsqueda_de_registro_de_deudores_alimentarios: str
-#     certificado_de_solicitud_de_licencia_al_cargo: str
-#     escrito_de_aceptación_y_manifestación_bajo_protesta: str
-#     escrito_de_la_persona_dirigente_del_partdio_politico: str
-#     formato_3_de_3_contra_la_violencia: str
-#     formulario_de_aceptación_de_registro: str
-#     ine_certificada: str
-#     informe_de_capacidad_economica: str
+# id
+# imageName
+# caption
+# imageUrl
+class DocumentsBase(SQLModel):
+    acta_de_nacimiento: str | None
+    formulario_de_aceptación_de_registro: str | None
+    formato_3_de_3_contra_la_violencia: str | None
+    ine_certificada: str | None
+
+
+# acuse_declaración_patrimonial: str
+# búsqueda_de_registro_de_deudores_alimentarios: str
+# certificado_de_solicitud_de_licencia_al_cargo: str
+# escrito_de_aceptación_y_manifestación_bajo_protesta: str
+# escrito_de_la_persona_dirigente_del_partdio_politico: str
+# informe_de_capacidad_economica: str
+
+
+class Documents(DocumentsBase, table=True):
+    id: uuid.UUID = Field(
+        default_factory=uuid.uuid4,
+        primary_key=True,
+        index=True,
+        nullable=False,
+    )
+    municipal_candidacy_id: uuid.UUID = Field(
+        foreign_key="municipalcandidacy.id",
+        ondelete="CASCADE",
+        unique=True,
+        nullable=False,
+    )
+    municipal_candidacy: MunicipalCandidacy = Relationship(  # pyright: ignore[reportAny]
+        back_populates="candidate_documents"
+    )
 
 
 # Generic message
