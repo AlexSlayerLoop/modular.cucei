@@ -1,8 +1,12 @@
 import { redirect, useFetcher } from "react-router";
 import type { Route } from "./+types/create-user";
-import { Users, type UserCreate } from "~/client";
+import { Users, type PoliticalParties, type UserCreate } from "~/client";
+import { userContext } from "~/context";
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function clientAction({
+  request,
+  context,
+}: Route.ClientActionArgs) {
   const formData = await request.formData();
   const is_superuser = formData.get("is_superuser") === "si";
   const full_name = formData.get("full_name") as string;
@@ -10,11 +14,16 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const password = formData.get("password") as string;
   const confirmar = formData.get("confirmar") as string;
   const municipality = formData.get("municipality") as string;
-  // TODO: agregar partido politico
+  const political_party = formData.get("political_party") as PoliticalParties;
 
   const body: UserCreate = { is_superuser, email, password };
   if (full_name && full_name.length > 0) body.full_name = full_name;
   municipality && (body.municipality = +municipality);
+
+  const currentUser = context.get(userContext);
+  body.political_party = currentUser?.political_party
+    ? currentUser.political_party
+    : political_party;
 
   if (password !== confirmar) {
     return { ok: false, message: "Las contraseñas no coinciden" };
@@ -151,6 +160,20 @@ export default function CreateUser() {
             />
           </div>
 
+          {/* partido politico */}
+          <div>
+            <label htmlFor="political_party" className="font-bold">
+              Partido Politico
+            </label>
+            <select name="political_party" id="political_party">
+              <option value="MC">MC</option>
+              <option value="MORENA">MORENA</option>
+              <option value="PRI">PRI</option>
+              <option value="PAN">PAN</option>
+              <option value="PT">PT</option>
+              <option value="PRD">PRD</option>
+            </select>
+          </div>
           <button
             type="submit"
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500"
